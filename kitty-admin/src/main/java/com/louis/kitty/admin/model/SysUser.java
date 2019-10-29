@@ -3,29 +3,39 @@ package com.louis.kitty.admin.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * ---------------------------
+ * 用户管理 (SysUser)         
+ * ---------------------------
+ * 作者：  kitty-generator
+ * 时间：  2019-10-28 10:36:25
+ * 说明：  我是由代码生成器生生成的
+ * ---------------------------
+ */
 public class SysUser extends BaseModel {
 
-    private String name;
+	/** 用户名 */
+	private String name;
+	/** 登录账号 */
+	private String loginName;
+	/** 密码 */
+	private String password;
+	/** 盐 */
+	private String salt;
+	/** 邮箱 */
+	private String email;
+	/** 手机号 */
+	private String mobile;
+	/** 状态  0：禁用   1：正常 */
+	private Integer status;
+	/** 机构ID */
+	private Long deptId;
+	/** 是否删除  -1：已删除  0：正常 */
+	private Integer delFlag;
 
-    private String password;
+	private String roleNames;
 
-    private String salt;
-
-    private String email;
-
-    private String mobile;
-
-    private Byte status;
-
-    private Long deptId;
-    
-    private String deptName;
-    
-    private Byte delFlag;
-    
-    private String roleNames;
-    
-    private List<SysUserRole> userRoles = new ArrayList<>();
+	private List<SysUserRole> userRoles = new ArrayList<>();
 
 	public String getName() {
 		return name;
@@ -33,6 +43,14 @@ public class SysUser extends BaseModel {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getLoginName() {
+		return loginName;
+	}
+
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
 
 	public String getPassword() {
@@ -67,11 +85,11 @@ public class SysUser extends BaseModel {
 		this.mobile = mobile;
 	}
 
-	public Byte getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(Byte status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
@@ -83,19 +101,11 @@ public class SysUser extends BaseModel {
 		this.deptId = deptId;
 	}
 
-	public String getDeptName() {
-		return deptName;
-	}
-
-	public void setDeptName(String deptName) {
-		this.deptName = deptName;
-	}
-
-	public Byte getDelFlag() {
+	public Integer getDelFlag() {
 		return delFlag;
 	}
 
-	public void setDelFlag(Byte delFlag) {
+	public void setDelFlag(Integer delFlag) {
 		this.delFlag = delFlag;
 	}
 
@@ -114,5 +124,4 @@ public class SysUser extends BaseModel {
 	public void setUserRoles(List<SysUserRole> userRoles) {
 		this.userRoles = userRoles;
 	}
-
 }

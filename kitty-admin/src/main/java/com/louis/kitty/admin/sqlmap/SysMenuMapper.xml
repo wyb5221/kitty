@@ -3,6 +3,7 @@
 <mapper namespace="com.louis.kitty.admin.dao.SysMenuMapper">
   <resultMap id="BaseResultMap" type="com.louis.kitty.admin.model.SysMenu">
     <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sys_key" jdbcType="BIGINT" property="sysKey" />
     <result column="parent_id" jdbcType="BIGINT" property="parentId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="url" jdbcType="VARCHAR" property="url" />
@@ -17,7 +18,7 @@
     <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, parent_id, name, url, perms, type, icon, order_num, create_by, create_time, 
+    id, sys_key, parent_id, name, url, perms, type, icon, order_num, create_by, create_time,
     last_update_by, last_update_time, del_flag
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -31,12 +32,12 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.louis.kitty.admin.model.SysMenu">
-    insert into sys_menu (id, parent_id, name, 
+    insert into sys_menu (id, sys_key, parent_id, name,
       url, perms, type, icon, 
       order_num, create_by, create_time, 
       last_update_by, last_update_time, del_flag
       )
-    values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{sysKey,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
       #{url,jdbcType=VARCHAR}, #{perms,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, 
       #{orderNum,jdbcType=INTEGER}, #{createBy,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
       #{lastUpdateBy,jdbcType=BIGINT}, #{lastUpdateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT}
@@ -47,6 +48,9 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
+      </if>
+      <if test="sysKey != null">
+        sys_key,
       </if>
       <if test="parentId != null">
         parent_id,
@@ -89,6 +93,9 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
+      <if test="sysKey != null">
+        #{sysKey,jdbcType=BIGINT},
+      </if>
       <if test="parentId != null">
         #{parentId,jdbcType=BIGINT},
       </if>
@@ -130,6 +137,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.louis.kitty.admin.model.SysMenu">
     update sys_menu
     <set>
+      <if test="sysKey != null">
+        sys_key = #{sysKey,jdbcType=BIGINT},
+      </if>
       <if test="parentId != null">
         parent_id = #{parentId,jdbcType=BIGINT},
       </if>
@@ -171,7 +181,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.louis.kitty.admin.model.SysMenu">
     update sys_menu
-    set parent_id = #{parentId,jdbcType=BIGINT},
+    set sys_key = #{sysKey,jdbcType=BIGINT},
+      parent_id = #{parentId,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
       perms = #{perms,jdbcType=VARCHAR},

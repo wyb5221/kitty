@@ -11,5 +11,6 @@ public interface SysConstants {
 	 * 系统管理员用户名
 	 */
 	String ADMIN = "admin";
-	
+
+	public static final String USER_INFO = "USER_INFO";
 }
