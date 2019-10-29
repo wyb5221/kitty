@@ -46,9 +46,9 @@ public class SysInfoController {
 
 		SysUser user = webutils.getUserSession();
 
-		record.setCreateBy(user.getLoginName());
+		record.setCreateBy(user.getUserName());
 		record.setCreateTime(new Date());
-		record.setLastUpdateBy(user.getLoginName());
+		record.setLastUpdateBy(user.getUserName());
 		record.setLastUpdateTime(new Date());
 		record.setDelFlag(DelFlagEnum.UNDELETED.getCode());
 
@@ -79,7 +79,7 @@ public class SysInfoController {
 
     /**
      * 基础分页查询
-     * @param pageRequest
+     * @param request
      * @return
      */
 	@PostMapping(value="/findByPage")
@@ -108,7 +108,7 @@ public class SysInfoController {
 
 		SysUser user = webutils.getUserSession();
 
-		record.setLastUpdateBy(user.getLoginName());
+		record.setLastUpdateBy(user.getUserName());
 		record.setLastUpdateTime(new Date());
 
 		return HttpResult.ok(sysInfoService.updateInfo(record));

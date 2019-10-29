@@ -45,12 +45,12 @@ public class SysUser extends BaseModel {
 		this.name = name;
 	}
 
-	public String getLoginName() {
+	public String getUserName() {
 		return userName;
 	}
 
-	public void setLoginName(String loginName) {
-		this.userName = loginName;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getPassword() {

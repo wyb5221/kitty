@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.louis.kitty.admin.dao.DataOperateMyMapper">
+
+  <resultMap id="BaseResultMap" type="com.louis.kitty.admin.model.SysApi">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="service_key" jdbcType="BIGINT" property="serviceKey" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="api_type" jdbcType="CHAR" property="apiType" />
+    <result column="auth_type" jdbcType="CHAR" property="authType" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
+  </resultMap>
+
+
+  <select id="querySysApiId" resultMap="BaseResultMap">
+      select sa.* from sys_service ss inner join sys_api sa
+      on ss.id=sa.service_key and ss.del_flag=0 and sa.del_flag=0
+      where ss.gate_code=#{gateCode} and sa.url=#{url}
+  </select>
+
+  <select id="querySysRoles" resultType="java.lang.String">
+      select DISTINCT sr.name from sys_api sa inner join sys_menu_api sma
+      on sa.id=sma.api_key and sa.del_flag=0
+      inner join sys_role_menu srm on sma.menu_key=srm.menu_id
+      inner join sys_role sr on srm.role_id=sr.id and sr.del_flag=0
+      where sa.id=#{id}
+  </select>
+
+
+
+</mapper>

@@ -45,7 +45,7 @@ public class WebUtils {
         Object user = getSession(SysConstants.USER_INFO);
         if(user == null){
             user = new SysUser();
-            ((SysUser) user).setLoginName("wyb");
+            ((SysUser) user).setUserName("wyb");
             ((SysUser) user).setName("wyb");
             ((SysUser) user).setId(new Long(33));
         }

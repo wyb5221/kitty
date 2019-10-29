@@ -52,14 +52,6 @@ public class SysApi {
 		this.serviceKey = serviceKey;
 	}
 
-	public Long getMenuKey() {
-		return menuKey;
-	}
-
-	public void setMenuKey(Long menuKey) {
-		this.menuKey = menuKey;
-	}
-
 	public String getName() {
 		return name;
 	}
