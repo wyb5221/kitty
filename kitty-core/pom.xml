@@ -25,17 +25,22 @@
 	</properties>
 	
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
 		<!-- kitty-pagehelper -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper-spring-boot-starter</artifactId>
 			<version>${pagehelper.spring.version}</version>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>com.louis</groupId>
 			<artifactId>kitty-common</artifactId>
 			<version>1.0.0</version>
-		</dependency>
+		</dependency>-->
 	</dependencies>
-	
+
 </project>
