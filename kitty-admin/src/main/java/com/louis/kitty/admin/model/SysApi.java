@@ -15,8 +15,6 @@ public class SysApi {
 	private Long id;
 	/** 微服务表主键 */
 	private Long serviceKey;
-	/** 菜单表主键 */
-	private Long menuKey;
 	/** 接口名称 */
 	private String name;
 	/** 接口地址url */

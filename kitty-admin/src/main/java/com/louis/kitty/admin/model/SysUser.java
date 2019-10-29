@@ -17,7 +17,7 @@ public class SysUser extends BaseModel {
 	/** 用户名 */
 	private String name;
 	/** 登录账号 */
-	private String loginName;
+	private String userName;
 	/** 密码 */
 	private String password;
 	/** 盐 */
@@ -46,11 +46,11 @@ public class SysUser extends BaseModel {
 	}
 
 	public String getLoginName() {
-		return loginName;
+		return userName;
 	}
 
 	public void setLoginName(String loginName) {
-		this.loginName = loginName;
+		this.userName = loginName;
 	}
 
 	public String getPassword() {
