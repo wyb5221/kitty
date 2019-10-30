@@ -1,14 +1,5 @@
 package com.louis.kitty.admin.sevice.impl;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.louis.kitty.admin.dao.SysRoleMapper;
 import com.louis.kitty.admin.dao.SysUserMapper;
 import com.louis.kitty.admin.dao.SysUserRoleMapper;
@@ -22,6 +13,14 @@ import com.louis.kitty.core.page.ColumnFilter;
 import com.louis.kitty.core.page.MybatisPageHelper;
 import com.louis.kitty.core.page.PageRequest;
 import com.louis.kitty.core.page.PageResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class SysUserServiceImpl  implements SysUserService {
@@ -81,7 +80,12 @@ public class SysUserServiceImpl  implements SysUserService {
 	public SysUser findById(Long id) {
 		return sysUserMapper.selectByPrimaryKey(id);
 	}
-	
+
+	@Override
+	public int update(SysUser record) {
+		return 0;
+	}
+
 	@Override
 	public SysUser findByName(String name) {
 		return sysUserMapper.findByName(name);
@@ -136,7 +140,7 @@ public class SysUserServiceImpl  implements SysUserService {
 
 	private String getRoleNames(List<SysUserRole> userRoles) {
 		StringBuilder sb = new StringBuilder();
-		for(Iterator<SysUserRole> iter=userRoles.iterator(); iter.hasNext();) {
+		for(Iterator<SysUserRole> iter = userRoles.iterator(); iter.hasNext();) {
 			SysUserRole userRole = iter.next();
 			SysRole sysRole = sysRoleMapper.selectByPrimaryKey(userRole.getRoleId());
 			if(sysRole == null) {

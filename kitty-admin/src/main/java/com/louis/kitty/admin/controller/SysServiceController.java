@@ -4,6 +4,7 @@ import com.louis.kitty.admin.model.SysService;
 import com.louis.kitty.admin.sevice.SysServiceService;
 import com.louis.kitty.core.http.HttpResult;
 import com.louis.kitty.core.page.PageRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("sysService")
+@Slf4j
 public class SysServiceController {
 
 	@Autowired
@@ -63,5 +65,15 @@ public class SysServiceController {
 	@GetMapping(value="/findById")
 	public HttpResult findById(@RequestParam Long id) {
 		return HttpResult.ok(sysServiceService.findById(id));
+	}
+	/**
+	 * 修改微服务配置
+	 * @param record
+	 * @return
+	 */
+	@PostMapping(value="/update")
+	public HttpResult update(@RequestBody SysService record) {
+		log.info("--update--修改微服务表数据入参record：{}", record);
+		return sysServiceService.update(record) > 0 ? HttpResult.ok() : HttpResult.error();
 	}
 }

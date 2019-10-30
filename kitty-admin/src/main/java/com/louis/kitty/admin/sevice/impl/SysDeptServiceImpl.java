@@ -1,17 +1,16 @@
 package com.louis.kitty.admin.sevice.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.louis.kitty.admin.dao.SysDeptMapper;
 import com.louis.kitty.admin.model.SysDept;
 import com.louis.kitty.admin.sevice.SysDeptService;
 import com.louis.kitty.core.page.MybatisPageHelper;
 import com.louis.kitty.core.page.PageRequest;
 import com.louis.kitty.core.page.PageResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SysDeptServiceImpl implements SysDeptService {
@@ -43,6 +42,11 @@ public class SysDeptServiceImpl implements SysDeptService {
 	@Override
 	public SysDept findById(Long id) {
 		return sysDeptMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public int update(SysDept record) {
+		return 0;
 	}
 
 	@Override

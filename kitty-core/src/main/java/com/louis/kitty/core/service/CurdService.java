@@ -1,9 +1,9 @@
 package com.louis.kitty.core.service;
 
-import java.util.List;
-
 import com.louis.kitty.core.page.PageRequest;
 import com.louis.kitty.core.page.PageResult;
+
+import java.util.List;
 
 /**
  * 通用CURD接口
@@ -36,7 +36,13 @@ public interface CurdService<T> {
 	 * @return
 	 */
 	T findById(Long id);
-	
+	/**
+	 * 根据ID 修改
+	 * @param record
+	 * @return
+	 */
+	int update(T record);
+
     /**
      * 分页查询
 	 * 这里统一封装了分页请求和结果，避免直接引入具体框架的分页对象, 如MyBatis或JPA的分页对象
