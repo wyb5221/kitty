@@ -57,6 +57,11 @@ public class SysInfoServiceImpl implements SysInfoService {
 	}
 
 	@Override
+	public int update(SysInfo record) {
+		return 0;
+	}
+
+	@Override
 	public PageResult findPage(PageRequest pageRequest) {
 		return MybatisPageHelper.findPage(pageRequest, sysInfoMapper);
 	}

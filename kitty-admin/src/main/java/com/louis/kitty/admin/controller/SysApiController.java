@@ -68,4 +68,14 @@ public class SysApiController {
 		log.info("--findById开始--");
 		return HttpResult.ok(sysApiService.findById(id));
 	}
+	/**
+	 * 修改系系统api配置
+	 * @param record
+	 * @return
+	 */
+	@PostMapping(value="/update")
+	public HttpResult update(@RequestBody SysApi record) {
+		log.info("--update--修改系统表数据入参record：{}", record);
+		return sysApiService.update(record) > 0 ? HttpResult.ok() : HttpResult.error();
+	}
 }

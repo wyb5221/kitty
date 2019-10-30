@@ -129,7 +129,12 @@
 			<version>1.18.4</version>
 			<scope>provided</scope>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.louis</groupId>
+            <artifactId>kitty-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
 	
 	<!--srping cloud-->
 	<dependencyManagement>

@@ -58,4 +58,11 @@ public class SysApiServiceImpl implements SysApiService {
 	}
 
 
+	@Override
+	public int update(SysApi sysApi) {
+		if (sysApi == null || sysApi.getId() == null) {
+			return 0;
+		}
+		return sysApiMapper.update(sysApi);
+	}
 }

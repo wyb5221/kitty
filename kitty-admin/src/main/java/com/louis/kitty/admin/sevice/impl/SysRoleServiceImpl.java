@@ -1,11 +1,5 @@
 package com.louis.kitty.admin.sevice.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.louis.kitty.admin.constants.SysConstants;
 import com.louis.kitty.admin.dao.SysMenuMapper;
 import com.louis.kitty.admin.dao.SysRoleMapper;
@@ -18,6 +12,11 @@ import com.louis.kitty.core.page.ColumnFilter;
 import com.louis.kitty.core.page.MybatisPageHelper;
 import com.louis.kitty.core.page.PageRequest;
 import com.louis.kitty.core.page.PageResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class SysRoleServiceImpl  implements SysRoleService {
@@ -53,6 +52,11 @@ public class SysRoleServiceImpl  implements SysRoleService {
 	@Override
 	public SysRole findById(Long id) {
 		return sysRoleMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public int update(SysRole record) {
+		return 0;
 	}
 
 	@Override
