@@ -53,6 +53,11 @@ public class SysMenuApiServiceImpl implements SysMenuApiService {
 	}
 
 	@Override
+	public int update(SysMenuApi record) {
+		return 0;
+	}
+
+	@Override
 	public PageResult findPage(PageRequest pageRequest) {
 		return MybatisPageHelper.findPage(pageRequest, sysMenuApiMapper);
 	}

@@ -57,4 +57,11 @@ public class SysServiceServiceImpl implements SysServiceService {
 		return MybatisPageHelper.findPage(pageRequest, sysServiceMapper);
 	}
 
+	@Override
+	public int update(SysService record) {
+		if (record == null || record.getId() == null) {
+			return 0;
+		}
+		return sysServiceMapper.update(record);
+	}
 }

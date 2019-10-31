@@ -18,6 +18,11 @@ import com.louis.kitty.admin.sevice.SysMenuService;
 import com.louis.kitty.core.page.MybatisPageHelper;
 import com.louis.kitty.core.page.PageRequest;
 import com.louis.kitty.core.page.PageResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -58,6 +63,11 @@ public class SysMenuServiceImpl implements SysMenuService {
 	@Override
 	public SysMenu findById(Long id) {
 		return sysMenuMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public int update(SysMenu record) {
+		return 0;
 	}
 
 	@Override
@@ -160,9 +170,9 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	private void findChildren(List<SysMenu> SysMenus, List<SysMenu> menus, int menuType) {
-		for (SysMenu SysMenu : SysMenus) {
-			List<SysMenu> children = new ArrayList<>();
-			for (SysMenu menu : menus) {
+		for (com.louis.kitty.admin.model.SysMenu SysMenu : SysMenus) {
+			List<com.louis.kitty.admin.model.SysMenu> children = new ArrayList<>();
+			for (com.louis.kitty.admin.model.SysMenu menu : menus) {
 				if(menuType == 1 && menu.getType() == 2) {
 					// 如果是获取类型不需要按钮，且菜单类型是按钮的，直接过滤掉
 					continue ;

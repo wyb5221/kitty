@@ -1,10 +1,5 @@
 package com.louis.kitty.admin.sevice.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.louis.kitty.admin.dao.SysLogMapper;
 import com.louis.kitty.admin.model.SysLog;
 import com.louis.kitty.admin.sevice.SysLogService;
@@ -12,6 +7,10 @@ import com.louis.kitty.core.page.ColumnFilter;
 import com.louis.kitty.core.page.MybatisPageHelper;
 import com.louis.kitty.core.page.PageRequest;
 import com.louis.kitty.core.page.PageResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SysLogServiceImpl  implements SysLogService {
@@ -43,6 +42,11 @@ public class SysLogServiceImpl  implements SysLogService {
 	@Override
 	public SysLog findById(Long id) {
 		return sysLogMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public int update(SysLog record) {
+		return 0;
 	}
 
 	@Override

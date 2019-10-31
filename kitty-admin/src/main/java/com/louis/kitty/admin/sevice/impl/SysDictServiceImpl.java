@@ -1,10 +1,5 @@
 package com.louis.kitty.admin.sevice.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.louis.kitty.admin.dao.SysDictMapper;
 import com.louis.kitty.admin.model.SysDict;
 import com.louis.kitty.admin.sevice.SysDictService;
@@ -12,6 +7,10 @@ import com.louis.kitty.core.page.ColumnFilter;
 import com.louis.kitty.core.page.MybatisPageHelper;
 import com.louis.kitty.core.page.PageRequest;
 import com.louis.kitty.core.page.PageResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SysDictServiceImpl  implements SysDictService {
@@ -43,6 +42,11 @@ public class SysDictServiceImpl  implements SysDictService {
 	@Override
 	public SysDict findById(Long id) {
 		return sysDictMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public int update(SysDict record) {
+		return 0;
 	}
 
 	@Override
