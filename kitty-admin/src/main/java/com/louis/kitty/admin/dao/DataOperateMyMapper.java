@@ -1,5 +1,6 @@
 package com.louis.kitty.admin.dao;
 
+import com.louis.kitty.admin.dto.resp.SysInfoMenuDTO;
 import com.louis.kitty.admin.model.SysApi;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,4 +13,7 @@ public interface DataOperateMyMapper {
 
     //根据api接口id查询接口的角色权限
     List<String> querySysRoles(Long id);
+
+    //查询系统对应的菜单
+    List<SysInfoMenuDTO> querySysInfoMenu();
 }

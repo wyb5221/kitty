@@ -1,10 +1,8 @@
 package com.louis.kitty.admin.aspect;
 
-import java.util.Date;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.beanutils.BeanUtils;
+import com.louis.kitty.admin.util.SecurityUtils;
+import com.louis.kitty.core.utils.StringUtils;
+//import org.apache.commons.beanutils.BeanUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -14,8 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.louis.kitty.admin.util.SecurityUtils;
-import com.louis.kitty.common.utils.StringUtils;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 /**
  * DAO切面，插入创建人，创建时间，修改人，修改时间
@@ -52,8 +50,8 @@ public class DaoAspect {
 			Object[] objects = pjp.getArgs();
 			if (objects != null && objects.length > 0) {
 				for (Object arg : objects) {
-					BeanUtils.setProperty(arg, lastUpdateBy, username);
-					BeanUtils.setProperty(arg, lastUpdateTime, new Date());
+//					BeanUtils.setProperty(arg, lastUpdateBy, username);
+//					BeanUtils.setProperty(arg, lastUpdateTime, new Date());
 				}
 			}
 		}
@@ -73,12 +71,12 @@ public class DaoAspect {
 			for (Object arg : objects) {
 				String username = getUserName();
 				if (username != null) {
-					if (StringUtils.isBlank(BeanUtils.getProperty(arg, createBy))) {
-						BeanUtils.setProperty(arg, createBy, username);
-					}
-					if (StringUtils.isBlank(BeanUtils.getProperty(arg, createTime))) {
-						BeanUtils.setProperty(arg, createTime, new Date());
-					}
+//					if (StringUtils.isBlank(BeanUtils.getProperty(arg, createBy))) {
+//						BeanUtils.setProperty(arg, createBy, username);
+//					}
+//					if (StringUtils.isBlank(BeanUtils.getProperty(arg, createTime))) {
+//						BeanUtils.setProperty(arg, createTime, new Date());
+//					}
 				}
 			}
 		}

@@ -17,6 +17,27 @@
     <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
   </resultMap>
 
+    <resultMap id="InfoMenuResultMap" type="com.louis.kitty.admin.dto.resp.SysInfoMenuDTO">
+        <id column="id" jdbcType="BIGINT" property="infokey" />
+        <result column="code" jdbcType="VARCHAR" property="code" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <collection property="menuList" ofType="com.louis.kitty.admin.model.SysMenu" column="id">
+            <id column="id" jdbcType="BIGINT" property="id" />
+            <result column="sys_key" jdbcType="BIGINT" property="sysKey" />
+            <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+            <result column="name" jdbcType="VARCHAR" property="name" />
+            <result column="url" jdbcType="VARCHAR" property="url" />
+            <result column="perms" jdbcType="VARCHAR" property="perms" />
+            <result column="type" jdbcType="INTEGER" property="type" />
+            <result column="icon" jdbcType="VARCHAR" property="icon" />
+            <result column="order_num" jdbcType="INTEGER" property="orderNum" />
+            <result column="create_by" jdbcType="BIGINT" property="createBy" />
+            <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+            <result column="last_update_by" jdbcType="BIGINT" property="lastUpdateBy" />
+            <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+            <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
+        </collection>
+    </resultMap>
 
   <select id="querySysApiId" resultMap="BaseResultMap">
       select sa.* from sys_service ss inner join sys_api sa
@@ -31,6 +52,12 @@
       inner join sys_role sr on srm.role_id=sr.id and sr.del_flag=0
       where sa.id=#{id}
   </select>
+
+    <select id="querySysInfoMenu" resultMap="InfoMenuResultMap">
+        select si.id as infokey,si.name,si.code,sm.*
+        from sys_info si inner join sys_menu sm on
+        si.id=sm.sys_key and si.del_flag=0 and sm.del_flag=0
+    </select>
 
 
 

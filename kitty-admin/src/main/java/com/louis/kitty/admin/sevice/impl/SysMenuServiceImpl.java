@@ -3,6 +3,11 @@ package com.louis.kitty.admin.sevice.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.louis.kitty.admin.dao.DataOperateMyMapper;
+import com.louis.kitty.admin.dao.SysInfoMapper;
+import com.louis.kitty.admin.dto.resp.SysInfoMenuDTO;
+import com.louis.kitty.admin.model.SysInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +20,16 @@ import com.louis.kitty.core.page.PageRequest;
 import com.louis.kitty.core.page.PageResult;
 
 @Service
+@Slf4j
 public class SysMenuServiceImpl implements SysMenuService {
 
 	@Autowired
 	private SysMenuMapper sysMenuMapper;
+	@Autowired
+	private SysInfoMapper sysInfoMapper;
+
+	@Autowired
+	private DataOperateMyMapper dataOperateMyMapper;
 
 	@Override
 	public int save(SysMenu record) {
@@ -72,11 +83,80 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
+	public List<SysMenu> findByInfoNameTree(String infoName, int menuType) {
+		List<SysMenu> sysMenus = new ArrayList<>();
+		List<SysMenu> menus = findByInfoName(infoName);
+		for (SysMenu menu : menus) {
+			if (menu.getParentId() == null || menu.getParentId() == 0) {
+				menu.setLevel(0);
+				if(!exists(sysMenus, menu)) {
+					sysMenus.add(menu);
+				}
+			}
+		}
+		sysMenus.sort((o1, o2) -> o1.getOrderNum().compareTo(o2.getOrderNum()));
+		findChildren(sysMenus, menus, menuType);
+		return sysMenus;
+	}
+
+	@Override
+	public List<SysInfoMenuDTO> findInfoTree(int menuType) {
+		List<SysInfoMenuDTO> infoMenuList = new ArrayList<>();
+
+		List<SysInfo> infoList = sysInfoMapper.findAll();
+		infoList.stream().forEach(info -> {
+			SysInfoMenuDTO sysInfoMenuDTO = new SysInfoMenuDTO();
+			sysInfoMenuDTO.setInfokey(info.getId());
+			sysInfoMenuDTO.setName(info.getName());
+			sysInfoMenuDTO.setCode(info.getCode());
+
+			List<SysMenu> menuList = findBySysKeyTree(info.getId(), 0);
+			sysInfoMenuDTO.setMenuList(menuList);
+
+			infoMenuList.add(sysInfoMenuDTO);
+		});
+
+		return infoMenuList;
+	}
+
+	public List<SysMenu> findBySysKeyTree(Long sysKey, int menuType) {
+		List<SysMenu> sysMenus = new ArrayList<>();
+		List<SysMenu> menus = findBySysKey(sysKey);
+		for (SysMenu menu : menus) {
+			if (menu.getParentId() == null || menu.getParentId() == 0) {
+				menu.setLevel(0);
+				if(!exists(sysMenus, menu)) {
+					sysMenus.add(menu);
+				}
+			}
+		}
+		sysMenus.sort((o1, o2) -> o1.getOrderNum().compareTo(o2.getOrderNum()));
+		findChildren(sysMenus, menus, menuType);
+		return sysMenus;
+	}
+
+	/**
+	 * 查询系统菜单
+	 * @param sysKey
+	 * @return
+	 */
+	public List<SysMenu> findBySysKey(Long sysKey) {
+		log.info("--查询系统菜单findBySysKey--sysKey:{}", sysKey);
+		return sysMenuMapper.findBySysKey(sysKey);
+	}
+
+	@Override
 	public List<SysMenu> findByUser(String userName) {
 		if(userName == null || "".equals(userName) || SysConstants.ADMIN.equalsIgnoreCase(userName)) {
 			return sysMenuMapper.findAll();
 		}
 		return sysMenuMapper.findByUserName(userName);
+	}
+
+	@Override
+	public List<SysMenu> findByInfoName(String InfoName) {
+		log.info("--查询系统菜单findByInfoName入参--InfoName:{}", InfoName);
+		return sysMenuMapper.findByInfoName(InfoName);
 	}
 
 	private void findChildren(List<SysMenu> SysMenus, List<SysMenu> menus, int menuType) {

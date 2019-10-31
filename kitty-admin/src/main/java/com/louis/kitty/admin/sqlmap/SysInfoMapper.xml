@@ -124,6 +124,10 @@
     select * from sys_info
   </select>
 
+  <select id="findAll" resultMap="BaseResultMap">
+    select * from sys_info where del_flag=0
+  </select>
+
   <update id="updateDel" parameterType="java.util.List">
     <if test="list != null">
       update sys_info

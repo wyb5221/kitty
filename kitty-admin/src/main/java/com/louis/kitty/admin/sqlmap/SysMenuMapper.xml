@@ -17,6 +17,27 @@
     <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
     <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
   </resultMap>
+
+  <resultMap id="InfoMenuMap" type="com.louis.kitty.admin.dto.resp.SysUserMenuDTO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sys_key" jdbcType="BIGINT" property="sysKey" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="perms" jdbcType="VARCHAR" property="perms" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="order_num" jdbcType="INTEGER" property="orderNum" />
+    <result column="create_by" jdbcType="BIGINT" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_update_by" jdbcType="BIGINT" property="lastUpdateBy" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
+    <result column="infokey" jdbcType="BIGINT" property="infokey" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="infoName" jdbcType="VARCHAR" property="infoName" />
+  </resultMap>
+
   <sql id="Base_Column_List">
     id, sys_key, parent_id, name, url, perms, type, icon, order_num, create_by, create_time,
     last_update_by, last_update_time, del_flag
@@ -223,4 +244,16 @@
     where rm.role_id = #{roleId,jdbcType=BIGINT}
     and m.id = rm.menu_id
   </select>
+  <select id="findBySysKey" resultMap="BaseResultMap">
+    select * from sys_menu where sys_key=#{sysKey}
+  </select>
+  <select id="findByInfoName" resultMap="InfoMenuMap">
+      select si.id as infokey,si.name as infoName,si.code,sm.* from
+      sys_menu sm inner join sys_info si on sm.sys_key=si.id and si.del_flag=0 and sm.del_flag=0
+      where 1=1
+      <if test="infoName != null" >
+        and si.name like CONCAT('%', #{infoName} , '%')
+      </if>
+  </select>
+
 </mapper>
