@@ -1,6 +1,8 @@
 package com.louis.kitty.admin.dao;
 
+import com.louis.kitty.admin.model.SysApi;
 import com.louis.kitty.admin.model.SysService;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -49,5 +51,8 @@ public interface SysServiceMapper {
      * @return
      */    
     List<SysService> findPage();
+
+
+    List<SysService> findPageByName(@Param(value="name") String name);
     
 }

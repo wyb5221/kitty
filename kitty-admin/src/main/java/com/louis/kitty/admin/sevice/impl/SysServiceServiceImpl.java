@@ -3,6 +3,7 @@ package com.louis.kitty.admin.sevice.impl;
 import com.louis.kitty.admin.dao.SysServiceMapper;
 import com.louis.kitty.admin.model.SysService;
 import com.louis.kitty.admin.sevice.SysServiceService;
+import com.louis.kitty.core.page.ColumnFilter;
 import com.louis.kitty.core.page.MybatisPageHelper;
 import com.louis.kitty.core.page.PageRequest;
 import com.louis.kitty.core.page.PageResult;
@@ -54,7 +55,22 @@ public class SysServiceServiceImpl implements SysServiceService {
 
 	@Override
 	public PageResult findPage(PageRequest pageRequest) {
-		return MybatisPageHelper.findPage(pageRequest, sysServiceMapper);
+		PageResult pageResult = null;
+		String name = getColumnFilterValue(pageRequest, "name");
+		if(name != null) {
+			pageResult = MybatisPageHelper.findPage(pageRequest, sysServiceMapper, "findPageByName", name);
+		} else {
+			pageResult = MybatisPageHelper.findPage(pageRequest, sysServiceMapper);
+		}
+		return pageResult;
+	}
+	public String getColumnFilterValue(PageRequest pageRequest, String filterName) {
+		String value = null;
+		ColumnFilter columnFilter = pageRequest.getColumnFilter(filterName);
+		if(columnFilter != null) {
+			value = columnFilter.getValue();
+		}
+		return value;
 	}
 
 	@Override

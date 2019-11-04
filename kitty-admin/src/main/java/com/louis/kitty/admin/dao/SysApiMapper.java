@@ -1,6 +1,7 @@
 package com.louis.kitty.admin.dao;
 
 import com.louis.kitty.admin.model.SysApi;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -49,5 +50,7 @@ public interface SysApiMapper {
      * @return
      */    
     List<SysApi> findPage();
+
+    List<SysApi> findPageByName(@Param(value="name") String name);
     
 }

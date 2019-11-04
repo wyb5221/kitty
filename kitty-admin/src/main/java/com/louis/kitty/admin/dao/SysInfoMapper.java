@@ -1,6 +1,7 @@
 package com.louis.kitty.admin.dao;
 
 import com.louis.kitty.admin.model.SysInfo;
+import com.louis.kitty.admin.model.SysUser;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -63,4 +64,7 @@ public interface SysInfoMapper {
      * @return
      */
     List<SysInfo> findInfoByPage(SysInfo sysInfo);
+
+
+    List<SysInfo> findPageByName(@Param(value="name") String name);
 }
