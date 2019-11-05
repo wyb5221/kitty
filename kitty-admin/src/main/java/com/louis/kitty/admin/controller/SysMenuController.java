@@ -67,7 +67,7 @@ public class SysMenuController {
 	 * @return
 	 */
 	@GetMapping(value="/findInfoMenuTree")
-	public HttpResult findInfoMenuTree() {
-		return HttpResult.ok(sysMenuService.findInfoTree( 0));
+	public HttpResult findInfoMenuTree(String interfaceType) {
+		return HttpResult.ok(sysMenuService.findInfoTree( 0, interfaceType));
 	}
 }

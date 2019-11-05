@@ -1,6 +1,7 @@
 package com.louis.kitty.admin.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,8 +27,12 @@ public class SysUser extends BaseModel {
 	private String email;
 	/** 手机号 */
 	private String mobile;
-	/** 状态  0：禁用   1：正常 */
+	/** 状态  0：禁用   1：正常：2：锁定 */
 	private Integer status;
+	/** 连续登录错误次数 */
+	private Integer loginErrorTimes;
+	/** 最后一次登录时间 */
+	private Date lastLoginTime;
 	/** 机构ID */
 	private Long deptId;
 	/** 是否删除  -1：已删除  0：正常 */
@@ -123,5 +128,22 @@ public class SysUser extends BaseModel {
 
 	public void setUserRoles(List<SysUserRole> userRoles) {
 		this.userRoles = userRoles;
+	}
+
+	public void setLoginErrorTimes(Integer loginErrorTimes) {
+		this.loginErrorTimes = loginErrorTimes;
+	}
+
+	public void setLastLoginTime(Date lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
+
+	public Integer getLoginErrorTimes() {
+
+		return loginErrorTimes;
+	}
+
+	public Date getLastLoginTime() {
+		return lastLoginTime;
 	}
 }

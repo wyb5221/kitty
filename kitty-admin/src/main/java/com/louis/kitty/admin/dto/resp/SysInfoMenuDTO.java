@@ -11,21 +11,21 @@ import java.util.List;
 public class SysInfoMenuDTO {
 
     /** 系统表主键 */
-    private Long infokey;
+    private Long sysKey;
     /** 系统名称 */
     private String name;
     /** 系统名称 */
     private String code;
     /** 系统菜单 */
-    private List<SysMenu> menuList;
+    private List<SysMenu> children;
 
     @Override
     public String toString() {
         return "SysInfoMenuDTO{" +
-                "infokey=" + infokey +
+                "sysKey=" + sysKey +
                 ", name='" + name + '\'' +
                 ", code='" + code + '\'' +
-                ", menuList=" + menuList +
+                ", children=" + children +
                 '}';
     }
 }

@@ -154,7 +154,7 @@
   <select id="findPageByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     <bind name="pattern" value="'%' + _parameter.name + '%'" />
     select
-    <include refid="Base_Column_List" />
+    *
     from sys_info
     where name like #{pattern}
   </select>

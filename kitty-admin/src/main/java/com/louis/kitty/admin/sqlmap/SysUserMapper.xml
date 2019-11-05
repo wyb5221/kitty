@@ -10,6 +10,8 @@
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="login_error_times" jdbcType="INTEGER" property="loginErrorTimes" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
     <result column="dept_id" jdbcType="BIGINT" property="deptId" />
     <result column="create_by" jdbcType="BIGINT" property="createBy" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -18,8 +20,8 @@
     <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, user_name, password, salt, email, mobile, status, dept_id, create_by, create_time,
-    last_update_by, last_update_time, del_flag
+    id, name, user_name, password, salt, email, mobile, status, login_error_times, last_login_time,
+     dept_id, create_by, create_time, last_update_by, last_update_time, del_flag
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -34,12 +36,13 @@
   <insert id="insert" parameterType="com.louis.kitty.admin.model.SysUser">
     insert into sys_user (id, name, user_name, password,
       salt, email, mobile, 
-      status, dept_id, create_by, 
+      status, login_error_times, last_login_time, dept_id, create_by,
       create_time, last_update_by, last_update_time, 
       del_flag)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
       #{salt,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
-      #{status,jdbcType=TINYINT}, #{deptId,jdbcType=BIGINT}, #{createBy,jdbcType=BIGINT}, 
+      #{status,jdbcType=TINYINT}, #{loginErrorTimes,jdbcType=INTEGER}, #{lastLoginTime,jdbcType=TIMESTAMP},
+       #{deptId,jdbcType=BIGINT}, #{createBy,jdbcType=BIGINT},
       #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=BIGINT}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
       #{delFlag,jdbcType=TINYINT})
   </insert>
@@ -69,6 +72,12 @@
       </if>
       <if test="status != null">
         status,
+      </if>
+      <if test="loginErrorTimes != null">
+        login_error_times,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
       </if>
       <if test="deptId != null">
         dept_id,
@@ -114,6 +123,12 @@
       <if test="status != null">
         #{status,jdbcType=TINYINT},
       </if>
+      <if test="loginErrorTimes != null">
+        #{loginErrorTimes,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="deptId != null">
         #{deptId,jdbcType=BIGINT},
       </if>
@@ -158,6 +173,12 @@
       <if test="status != null">
         status = #{status,jdbcType=TINYINT},
       </if>
+      <if test="loginErrorTimes != null">
+        login_error_times = #{loginErrorTimes,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="deptId != null">
         dept_id = #{deptId,jdbcType=BIGINT},
       </if>
@@ -188,6 +209,8 @@
       email = #{email,jdbcType=VARCHAR},
       mobile = #{mobile,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},
+      login_error_times = #{loginErrorTimes,jdbcType=INTEGER},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
       dept_id = #{deptId,jdbcType=BIGINT},
       create_by = #{createBy,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},

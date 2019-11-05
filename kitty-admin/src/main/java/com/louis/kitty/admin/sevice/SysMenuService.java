@@ -34,7 +34,7 @@ public interface SysMenuService extends CurdService<SysMenu> {
 	 * @param menuType 获取菜单类型，0：获取所有菜单，包含按钮，1：获取所有菜单，不包含按钮
 	 * @return
 	 */
-	List<SysInfoMenuDTO> findInfoTree(int menuType);
+	List<SysInfoMenuDTO> findInfoTree(int menuType, String interfaceType);
 
 	/**
 	 * 根据用户名查找菜单列表
