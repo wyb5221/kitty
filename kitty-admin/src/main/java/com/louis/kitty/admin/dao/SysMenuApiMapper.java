@@ -45,9 +45,15 @@ public interface SysMenuApiMapper {
 
     /**
      * 基础分页查询
-     * @param record
      * @return
      */    
     List<SysMenuApi> findPage();
-    
+
+
+    List<SysMenuApi> queryByMenuKey(Long menuKey);
+
+    int insertBatch(List<SysMenuApi> list);
+
+    int deleteBatch(List<SysMenuApi> list);
+
 }

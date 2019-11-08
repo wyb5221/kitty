@@ -80,4 +80,14 @@ public class SysServiceServiceImpl implements SysServiceService {
 		}
 		return sysServiceMapper.update(record);
 	}
+
+	@Override
+	public PageResult findBySysKey(Long sysKey) {
+		PageResult pageResult = new PageResult();
+		if (sysKey == null) {
+			return pageResult;
+		}
+		pageResult.setContent(sysServiceMapper.queryBySysKey(sysKey));
+		return pageResult;
+	}
 }

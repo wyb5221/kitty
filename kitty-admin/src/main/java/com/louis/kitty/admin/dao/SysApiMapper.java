@@ -52,5 +52,7 @@ public interface SysApiMapper {
     List<SysApi> findPage();
 
     List<SysApi> findPageByName(@Param(value="name") String name);
+
+    List<SysApi> queryByKey(Long serviceKey, String name);
     
 }

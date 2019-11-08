@@ -66,6 +66,15 @@ public class SysServiceController {
 	public HttpResult findById(@RequestParam Long id) {
 		return HttpResult.ok(sysServiceService.findById(id));
 	}
+    /**
+     * 根据系统id查询
+     * @param sysKey
+     * @return
+     */
+	@GetMapping(value="/findBySysKey")
+	public HttpResult findBySysKey(@RequestParam Long sysKey) {
+		return HttpResult.ok(sysServiceService.findBySysKey(sysKey));
+	}
 	/**
 	 * 修改微服务配置
 	 * @param record

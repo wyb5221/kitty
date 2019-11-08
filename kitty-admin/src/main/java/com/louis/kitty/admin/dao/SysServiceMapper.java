@@ -54,5 +54,7 @@ public interface SysServiceMapper {
 
 
     List<SysService> findPageByName(@Param(value="name") String name);
+
+    List<SysService> queryBySysKey(Long sysKey);
     
 }

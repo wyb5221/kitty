@@ -1,5 +1,6 @@
 package com.louis.kitty.admin.controller;
 
+import com.louis.kitty.admin.dto.BindRequest;
 import com.louis.kitty.admin.model.SysMenuApi;
 import com.louis.kitty.admin.sevice.SysMenuApiService;
 import com.louis.kitty.core.http.HttpResult;
@@ -63,5 +64,14 @@ public class SysMenuApiController {
 	@GetMapping(value="/findById")
 	public HttpResult findById(@RequestParam Long id) {
 		return HttpResult.ok(sysMenuApiService.findById(id));
+	}
+
+	@PostMapping(value="/bindApi")
+	public HttpResult bindApi(@RequestBody BindRequest request) {
+		return sysMenuApiService.bindApi(request) > 0 ? HttpResult.ok() : HttpResult.error();
+	}
+	@PostMapping(value="/unbindApi")
+	public HttpResult unbindApi(@RequestBody BindRequest request) {
+		return sysMenuApiService.unbindApi(request) > 0 ? HttpResult.ok() : HttpResult.error();
 	}
 }
