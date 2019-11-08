@@ -149,7 +149,12 @@
     select * from sys_service
     where id = #{id,jdbcType=BIGINT}
   </select>
-  
+
+  <select id="queryBySysKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select * from sys_service
+    where del_flag=0 and sys_key=#{sysKey,jdbcType=BIGINT}
+  </select>
+
   <select id="findPage" resultMap="BaseResultMap">
     select * from sys_service
   </select>
