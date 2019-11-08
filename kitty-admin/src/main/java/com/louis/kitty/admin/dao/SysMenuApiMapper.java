@@ -1,5 +1,6 @@
 package com.louis.kitty.admin.dao;
 
+import com.louis.kitty.admin.model.SysApi;
 import com.louis.kitty.admin.model.SysMenuApi;
 
 import java.util.List;
@@ -49,5 +50,8 @@ public interface SysMenuApiMapper {
      * @return
      */    
     List<SysMenuApi> findPage();
+
+
+    List<SysMenuApi> queryByMenuKey(Long menuKey);
     
 }

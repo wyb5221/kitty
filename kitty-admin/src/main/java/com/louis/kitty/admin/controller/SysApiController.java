@@ -3,6 +3,7 @@ package com.louis.kitty.admin.controller;
 import com.louis.kitty.admin.model.SysApi;
 import com.louis.kitty.admin.sevice.SysApiService;
 import com.louis.kitty.core.http.HttpResult;
+import com.louis.kitty.core.http.HttpStatus;
 import com.louis.kitty.core.page.PageRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,5 +78,16 @@ public class SysApiController {
 	public HttpResult update(@RequestBody SysApi record) {
 		log.info("--update--修改系统表数据入参record：{}", record);
 		return sysApiService.update(record) > 0 ? HttpResult.ok() : HttpResult.error();
+	}
+
+	/**
+	 * 根据微服务id查询已绑定菜单的一份列表，和未绑定菜单一份列表
+	 */
+	@GetMapping(value="/findByKey")
+	public HttpResult findByKey(@RequestParam Long serviceKey, @RequestParam Long menuKey) {
+		if (serviceKey == null || menuKey == null){
+			return HttpResult.error(HttpStatus.SC_BAD_REQUEST, "参数不能为空");
+		}
+		return HttpResult.ok(sysApiService.findByKey(serviceKey, menuKey));
 	}
 }

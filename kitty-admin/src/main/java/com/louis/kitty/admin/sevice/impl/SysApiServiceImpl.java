@@ -1,7 +1,9 @@
 package com.louis.kitty.admin.sevice.impl;
 
 import com.louis.kitty.admin.dao.SysApiMapper;
+import com.louis.kitty.admin.dao.SysMenuApiMapper;
 import com.louis.kitty.admin.model.SysApi;
+import com.louis.kitty.admin.model.SysMenuApi;
 import com.louis.kitty.admin.sevice.SysApiService;
 import com.louis.kitty.core.page.ColumnFilter;
 import com.louis.kitty.core.page.MybatisPageHelper;
@@ -9,8 +11,13 @@ import com.louis.kitty.core.page.PageRequest;
 import com.louis.kitty.core.page.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * ---------------------------
@@ -23,7 +30,11 @@ import java.util.List;
  */
 @Service
 public class SysApiServiceImpl implements SysApiService {
+	private static final String BIND_LIST = "bindList";
+	private static final String BINDING_LIST = "bindingList";
 
+	@Autowired
+	private SysMenuApiMapper sysMenuApiMapper;
 	@Autowired
 	private SysApiMapper sysApiMapper;
 
@@ -80,5 +91,28 @@ public class SysApiServiceImpl implements SysApiService {
 			return 0;
 		}
 		return sysApiMapper.update(sysApi);
+	}
+
+	@Override
+	public Map findByKey(Long serviceKey, Long menuKey) {
+		Map<String, List<SysApi>> result = new HashMap<>(4);
+
+		//查询api和菜单api
+		List<SysApi> sysApis = sysApiMapper.queryByKey(serviceKey);
+		List<SysMenuApi> sysMenuApis = sysMenuApiMapper.queryByMenuKey(menuKey);
+
+		//区分已经绑定api和未绑定api
+		List<SysApi> bindList = new ArrayList<>();
+		List<SysApi> bingingList = new ArrayList<>();
+		if (CollectionUtils.isEmpty(sysApis) || CollectionUtils.isEmpty(sysMenuApis)) {
+			bingingList = sysApis;
+		}else {
+			List<Long> apiKeys = sysMenuApis.stream().map(SysMenuApi::getApiKey).collect(Collectors.toList());
+			bindList = sysApis.stream().filter(sysApi -> apiKeys.contains(sysApi.getId())).collect(Collectors.toList());
+			bingingList = sysApis.stream().filter(sysApi -> !apiKeys.contains(sysApi.getId())).collect(Collectors.toList());
+		}
+		result.put(BIND_LIST, bindList);
+		result.put(BINDING_LIST, bingingList);
+		return result;
 	}
 }

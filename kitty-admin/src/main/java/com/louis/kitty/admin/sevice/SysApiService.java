@@ -3,6 +3,8 @@ package com.louis.kitty.admin.sevice;
 import com.louis.kitty.admin.model.SysApi;
 import com.louis.kitty.core.service.CurdService;
 
+import java.util.Map;
+
 /**
  * ---------------------------
  * 系统api配置表 (SysApiService)         
@@ -14,4 +16,5 @@ import com.louis.kitty.core.service.CurdService;
  */
 public interface SysApiService extends CurdService<SysApi> {
 
+    Map findByKey(Long serviceKey, Long menuKey);
 }
