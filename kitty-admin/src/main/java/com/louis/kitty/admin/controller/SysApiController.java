@@ -92,7 +92,7 @@ public class SysApiController {
     @GetMapping(value = "/findByKey")
     public HttpResult findByKey(@RequestParam Long serviceKey, @RequestParam Long menuKey, @RequestParam String name) {
         if (serviceKey == null || menuKey == null) {
-            return HttpResult.error(HttpStatus.SC_BAD_REQUEST, "参数不能为空");
+            return HttpResult.error(HttpStatus.SC_BAD_REQUEST, "参数serviceKey,menuKey不能为空");
         }
         return HttpResult.ok(sysApiService.findByKey(serviceKey, menuKey, name));
     }
