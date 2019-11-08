@@ -1,5 +1,6 @@
 package com.louis.kitty.admin.sevice;
 
+import com.louis.kitty.admin.dto.BindRequest;
 import com.louis.kitty.admin.model.SysMenuApi;
 import com.louis.kitty.core.service.CurdService;
 
@@ -14,4 +15,7 @@ import com.louis.kitty.core.service.CurdService;
  */
 public interface SysMenuApiService extends CurdService<SysMenuApi> {
 
+    int bindApi(BindRequest request);
+
+    int unbindApi(BindRequest request);
 }
