@@ -16,5 +16,5 @@ import java.util.Map;
  */
 public interface SysApiService extends CurdService<SysApi> {
 
-    Map findByKey(Long serviceKey, Long menuKey);
+    Map findByKey(Long serviceKey, Long menuKey, String name);
 }

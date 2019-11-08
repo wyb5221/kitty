@@ -94,16 +94,16 @@ public class SysApiServiceImpl implements SysApiService {
 	}
 
 	@Override
-	public Map findByKey(Long serviceKey, Long menuKey) {
+	public Map findByKey(Long serviceKey, Long menuKey, String name) {
 		Map<String, List<SysApi>> result = new HashMap<>(4);
 
 		//查询api和菜单api
-		List<SysApi> sysApis = sysApiMapper.queryByKey(serviceKey);
+		List<SysApi> sysApis = sysApiMapper.queryByKey(serviceKey, name);
 		List<SysMenuApi> sysMenuApis = sysMenuApiMapper.queryByMenuKey(menuKey);
 
 		//区分已经绑定api和未绑定api
 		List<SysApi> bindList = new ArrayList<>();
-		List<SysApi> bingingList = new ArrayList<>();
+		List<SysApi> bingingList;
 		if (CollectionUtils.isEmpty(sysApis) || CollectionUtils.isEmpty(sysMenuApis)) {
 			bingingList = sysApis;
 		}else {

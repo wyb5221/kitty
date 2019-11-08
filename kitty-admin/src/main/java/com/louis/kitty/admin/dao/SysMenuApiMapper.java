@@ -1,6 +1,5 @@
 package com.louis.kitty.admin.dao;
 
-import com.louis.kitty.admin.model.SysApi;
 import com.louis.kitty.admin.model.SysMenuApi;
 
 import java.util.List;
