@@ -31,6 +31,8 @@ public class SysMenu extends BaseModel {
 	private Integer orderNum;
 	/** 是否删除  -1：已删除  0：正常 */
 	private Integer delFlag;
+	/** 是否是系统默认菜单 */
+	private String sysDefault;
 
 	// 非数据库字段
 	private String parentName;
@@ -133,5 +135,14 @@ public class SysMenu extends BaseModel {
 
 	public void setParentName(String parentName) {
 		this.parentName = parentName;
+	}
+
+	public void setSysDefault(String sysDefault) {
+		this.sysDefault = sysDefault;
+	}
+
+	public String getSysDefault() {
+
+		return sysDefault;
 	}
 }

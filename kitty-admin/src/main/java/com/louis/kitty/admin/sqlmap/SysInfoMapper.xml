@@ -124,6 +124,10 @@
     select * from sys_info
   </select>
 
+  <select id="findAll" resultMap="BaseResultMap">
+    select * from sys_info where del_flag=0
+  </select>
+
   <update id="updateDel" parameterType="java.util.List">
     <if test="list != null">
       update sys_info
@@ -150,7 +154,7 @@
   <select id="findPageByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     <bind name="pattern" value="'%' + _parameter.name + '%'" />
     select
-    <include refid="Base_Column_List" />
+    *
     from sys_info
     where name like #{pattern}
   </select>

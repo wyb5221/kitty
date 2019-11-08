@@ -39,15 +39,35 @@ public class SysMenuController {
 		return HttpResult.ok(sysMenuService.delete(records));
 	}
 
+	/**
+	 * 根据登陆用户查询系统菜单
+	 * @param userName
+	 * @return
+	 */
 	@PreAuthorize("hasAuthority('sys:menu:view')")
 	@GetMapping(value="/findNavTree")
 	public HttpResult findNavTree(@RequestParam String userName) {
 		return HttpResult.ok(sysMenuService.findTree(userName, 1));
 	}
-	
+
+	/**
+	 * 根据系统名称查询系统菜单
+	 * @param infoName
+	 * @return
+	 */
 	@PreAuthorize("hasAuthority('sys:menu:view')")
 	@GetMapping(value="/findMenuTree")
-	public HttpResult findMenuTree() {
-		return HttpResult.ok(sysMenuService.findTree(null, 0));
+	public HttpResult findMenuTree(String infoName) {
+		return HttpResult.ok(sysMenuService.findByInfoNameTree( infoName,0));
+	}
+
+	/**
+	 * 查询系统菜单
+	 * @param
+	 * @return
+	 */
+	@GetMapping(value="/findInfoMenuTree")
+	public HttpResult findInfoMenuTree(String interfaceType) {
+		return HttpResult.ok(sysMenuService.findInfoTree( 0, interfaceType));
 	}
 }

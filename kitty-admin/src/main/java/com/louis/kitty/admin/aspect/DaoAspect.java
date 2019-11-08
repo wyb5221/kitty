@@ -1,9 +1,7 @@
 package com.louis.kitty.admin.aspect;
 
-import java.util.Date;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.louis.kitty.admin.util.SecurityUtils;
+import com.louis.kitty.core.utils.StringUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -14,8 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.louis.kitty.admin.util.SecurityUtils;
-import com.louis.kitty.common.utils.StringUtils;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 /**
  * DAO切面，插入创建人，创建时间，修改人，修改时间

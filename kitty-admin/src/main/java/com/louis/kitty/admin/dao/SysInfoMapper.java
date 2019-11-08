@@ -53,6 +53,13 @@ public interface SysInfoMapper {
     List<SysInfo> findPage();
 
     /**
+     * 基础所有数据
+     * @param record
+     * @return
+     */
+    List<SysInfo> findAll();
+
+    /**
      * 修改删除状态为已删除
      * @param sysInfos
      * @return
