@@ -38,4 +38,6 @@ public interface SysUserService extends CurdService<SysUser> {
 	 * @return
 	 */
 	int unlockUser(Long id) throws Exception;
+
+    int loginTimeReset(Long userId);
 }
