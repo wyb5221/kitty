@@ -206,7 +206,7 @@ public class SysUserServiceImpl  implements SysUserService {
 
 	@Override
 	public int loginErr(Long userId) {
-		log.info("--用户登录异常--userId:{}", userId);
+		log.info("--用户登录异常--userId:{},maxTime:{}", userId, maxTime);
 		return sysUserMapper.updateErrorTimes(userId, Integer.parseInt(maxTime));
 	}
 

@@ -113,7 +113,7 @@
     INSERT INTO sys_menu_api
     (menu_key, api_key, create_by, create_time)
     VALUES
-    <foreach collection ="list" item="item" open="(" separator="," close=")" >
+    <foreach collection ="list" item="item"  separator=","  >
       (#{item.menuKey}, #{item.apiKey}, #{item.createBy}, #{item.createTime})
     </foreach >
   </insert>
@@ -121,9 +121,9 @@
   <delete id="deleteBatch" parameterType="java.util.List">
     delete from sys_menu_api
     <where>
-      {menu_key, api_key} in
+      (menu_key, api_key) in
       <foreach collection="list"  item="item" open="(" separator="," close=")"  >
-        #{item.menuKey}, #{item.apiKey}
+        (#{item.menuKey}, #{item.apiKey})
       </foreach>
     </where>
   </delete>

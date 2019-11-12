@@ -75,10 +75,11 @@ public class SysMenuApiServiceImpl implements SysMenuApiService {
 		//param parse
 		SysUser user = webUtils.getUserSession();
 		List<SysMenuApi> bindList = request.getBindList();
-		bindList.forEach(sysMenuApi -> {
-			sysMenuApi.setCreateBy(user.getUserName());
-			sysMenuApi.setCreateTime(new Date());
-		});
+		System.out.println(bindList);
+//		bindList.forEach(sysMenuApi -> {
+//			sysMenuApi.setCreateBy(user.getUserName());
+//			sysMenuApi.setCreateTime(new Date());
+//		});
 
 		//insert
 		return sysMenuApiMapper.insertBatch(bindList);

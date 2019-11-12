@@ -1,5 +1,6 @@
 package com.louis.kitty.admin;
 
+import com.ctrip.framework.apollo.spring.annotation.EnableApolloConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -10,6 +11,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @date Oct 29, 2018
  */
 @EnableDiscoveryClient
+@EnableApolloConfig
 @SpringBootApplication(scanBasePackages={"com.louis.kitty"})
 public class KittyAdminApplication {
 
