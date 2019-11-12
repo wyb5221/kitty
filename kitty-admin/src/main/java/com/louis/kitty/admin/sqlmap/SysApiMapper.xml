@@ -161,7 +161,7 @@
     where name like #{pattern}
   </select>
 
-  <select id="queryByKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="queryByKey"  resultMap="BaseResultMap">
     select * from sys_api
     where del_flag=0 and service_key=#{serviceKey,jdbcType=BIGINT}
     <if test="name!=null and name!=''">

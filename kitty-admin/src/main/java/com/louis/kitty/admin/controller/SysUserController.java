@@ -96,5 +96,21 @@ public class SysUserController {
 	public HttpResult findPage(@RequestBody PageRequest pageRequest) {
 		return HttpResult.ok(sysUserService.findPage(pageRequest));
 	}
-	
+
+	/**
+	 * 解锁用户
+	 * @param id
+	 * @return
+	 */
+	@GetMapping(value="/unlock")
+	public HttpResult findPermissions(Long id) throws Exception {
+		int result = sysUserService.unlockUser(id);
+		if(result > 0){
+			return HttpResult.ok();
+		}else{
+			return HttpResult.error(500, "该用户不需要解锁");
+		}
+
+	}
+
 }
