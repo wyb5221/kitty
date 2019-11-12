@@ -30,6 +30,8 @@ public interface SysUserService extends CurdService<SysUser> {
 	 */
 	List<SysUserRole> findUserRoles(Long userId);
 
+	int loginErr(Long userId);
+
 	/**
 	 * 解锁用户
 	 * @param id

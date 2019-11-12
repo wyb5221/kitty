@@ -16,6 +16,7 @@ import com.louis.kitty.core.page.PageRequest;
 import com.louis.kitty.core.page.PageResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +37,10 @@ public class SysUserServiceImpl  implements SysUserService {
 	private SysUserRoleMapper sysUserRoleMapper;
 	@Autowired
 	private SysRoleMapper sysRoleMapper;
+
+	@Value("login_error_max_time")
+	private String maxTime;
+
 
 	@Transactional
 	@Override
@@ -188,5 +193,11 @@ public class SysUserServiceImpl  implements SysUserService {
 		}else{
 			return -1;
 		}
+	}
+
+	@Override
+	public int loginErr(Long userId) {
+		log.info("--用户登录异常--userId:{}", userId);
+		return sysUserMapper.updateErrorTimes(userId, Integer.parseInt(maxTime));
 	}
 }

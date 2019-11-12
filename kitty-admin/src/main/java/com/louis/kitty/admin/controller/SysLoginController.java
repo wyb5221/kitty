@@ -84,6 +84,7 @@ public class SysLoginController {
 		}
 		
 		if (!PasswordUtils.matches(user.getSalt(), password, user.getPassword())) {
+			sysUserService.loginErr(user.getId());
 			return HttpResult.error("密码不正确");
 		}
 

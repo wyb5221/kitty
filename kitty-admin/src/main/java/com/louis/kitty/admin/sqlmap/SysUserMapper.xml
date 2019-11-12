@@ -238,4 +238,15 @@
     where u.name like #{patternName}
     and u.email like #{patternEmail}
   </select>
+  <update id="updateErrorTimes" >
+    update um.sys_user
+    set login_error_times =
+        IF(#{maxTime,jdbcType=INTEGER} > login_error_times, login_error_times + 1, login_error_times)
+      , status =
+          IF(login_error_times = #{maxTime,jdbcType=INTEGER}, 2, status)
+    where del_flag = 0
+      and status = 1
+      and id = #{userId,jdbcType=BIGINT};
+  </update>
+
 </mapper>
