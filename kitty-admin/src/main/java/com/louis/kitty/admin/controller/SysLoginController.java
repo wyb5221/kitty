@@ -2,6 +2,7 @@ package com.louis.kitty.admin.controller;
 
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
+import com.louis.kitty.admin.enums.UserStatusEnum;
 import com.louis.kitty.admin.model.SysUser;
 import com.louis.kitty.admin.security.JwtAuthenticatioToken;
 import com.louis.kitty.admin.sevice.SysUserService;
@@ -78,23 +79,22 @@ public class SysLoginController {
 		// 用户信息
 		SysUser user = sysUserService.findByName(username);
 
-		// 账号不存在、密码错误
-		if (user == null) {
-			return HttpResult.error("账号不存在");
-		}
-		
-		if (!PasswordUtils.matches(user.getSalt(), password, user.getPassword())) {
-			sysUserService.loginErr(user.getId());
-			return HttpResult.error("密码不正确");
+		// 账号异常
+		if (user == null || !UserStatusEnum.NORMAL.getCode().equals(user.getStatus())) {
+			return HttpResult.error("账号状态异常,请联系管理员");
 		}
 
-		// 账号锁定
-		if (user.getStatus() == 0) {
-			return HttpResult.error("账号已被锁定,请联系管理员");
+		Long id = user.getId();
+		if (!PasswordUtils.matches(user.getSalt(), password, user.getPassword())) {
+			sysUserService.loginErr(id);
+			return HttpResult.error("密码不正确");
 		}
 
 		// 系统登录认证
 		JwtAuthenticatioToken token = SecurityUtils.login(request, username, password, authenticationManager);
+
+		//登录成功重置登录错误次数
+		sysUserService.loginTimeReset(id);
 				
 		return HttpResult.ok(token);
 	}

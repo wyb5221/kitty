@@ -38,7 +38,7 @@ public class SysUserServiceImpl  implements SysUserService {
 	@Autowired
 	private SysRoleMapper sysRoleMapper;
 
-	@Value("login_error_max_time")
+	@Value("${login_error_max_time}")
 	private String maxTime;
 
 
@@ -194,10 +194,19 @@ public class SysUserServiceImpl  implements SysUserService {
 			return -1;
 		}
 	}
+	@Override
+	public int loginTimeReset(Long userId) {
+		SysUser user = new SysUser();
+		user.setId(userId);
+		user.setLoginErrorTimes(0);
+		int update = sysUserMapper.updateByPrimaryKeySelective(user);
+		log.info("--用户状态重置--update:{}", update > 0);
+	}
 
 	@Override
 	public int loginErr(Long userId) {
 		log.info("--用户登录异常--userId:{}", userId);
 		return sysUserMapper.updateErrorTimes(userId, Integer.parseInt(maxTime));
 	}
+
 }
