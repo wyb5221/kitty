@@ -3,6 +3,7 @@ package com.louis.kitty.admin.sevice.impl;
 import com.louis.kitty.admin.dao.SysRoleMapper;
 import com.louis.kitty.admin.dao.SysUserMapper;
 import com.louis.kitty.admin.dao.SysUserRoleMapper;
+import com.louis.kitty.admin.enums.UserStatusEnum;
 import com.louis.kitty.admin.model.SysMenu;
 import com.louis.kitty.admin.model.SysRole;
 import com.louis.kitty.admin.model.SysUser;
@@ -13,6 +14,7 @@ import com.louis.kitty.core.page.ColumnFilter;
 import com.louis.kitty.core.page.MybatisPageHelper;
 import com.louis.kitty.core.page.PageRequest;
 import com.louis.kitty.core.page.PageResult;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +25,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@Slf4j
 public class SysUserServiceImpl  implements SysUserService {
 
 	@Autowired
@@ -169,5 +172,21 @@ public class SysUserServiceImpl  implements SysUserService {
 	@Override
 	public List<SysUserRole> findUserRoles(Long userId) {
 		return sysUserRoleMapper.findUserRoles(userId);
+	}
+
+	@Override
+	public int unlockUser(Long id) throws Exception {
+
+		SysUser sysUser = sysUserMapper.selectByPrimaryKey(id);
+		log.info("--用户状态--sysUser:{}", sysUser);
+		if(null != sysUser && UserStatusEnum.LOCKING.getCode().equals(sysUser.getStatus())){
+			SysUser user = new SysUser();
+			user.setId(id);
+			user.setLoginErrorTimes(0);
+			user.setStatus(UserStatusEnum.NORMAL.getCode());
+			return sysUserMapper.updateByPrimaryKeySelective(user);
+		}else{
+			return -1;
+		}
 	}
 }
