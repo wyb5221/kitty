@@ -201,6 +201,7 @@ public class SysUserServiceImpl  implements SysUserService {
 		user.setLoginErrorTimes(0);
 		int update = sysUserMapper.updateByPrimaryKeySelective(user);
 		log.info("--用户状态重置--update:{}", update > 0);
+        return update;
 	}
 
 	@Override
